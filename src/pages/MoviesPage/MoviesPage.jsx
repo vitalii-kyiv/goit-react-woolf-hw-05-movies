@@ -1,15 +1,26 @@
 import { getSearchMoviesApi } from 'api/movieService';
 import SearchForm from 'components/Form/Form';
 import Movies from 'components/Movies/Movies';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
   const [searchResults, setSearchResult] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const query = searchParams.get('query');
+    if (query) {
+      getSearchMovies(query);
+    }
+  }, [searchParams]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const query = evt.target.elements.query.value;
-    getSearchMovies(query);
+    const query = evt.target.elements.query.value.trim();
+    if (query) {
+      setSearchParams({ query });
+    }
   };
 
   const getSearchMovies = async query => {
