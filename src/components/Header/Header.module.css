@@ -1,7 +1,14 @@
 .header {
-  
   background-color: blue;
   color: white;
+  margin-bottom: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.list {
+  margin-left: 40px;
   display: flex;
-  justify-content: left;
+  gap: 24px;
+  font-size: 32px;
 }

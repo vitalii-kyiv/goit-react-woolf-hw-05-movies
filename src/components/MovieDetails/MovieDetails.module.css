@@ -1,0 +1,24 @@
+.img {
+  border-radius: 15px;
+  margin-bottom: 8px;
+}
+
+.list {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.text {
+  margin-bottom: 16px;
+  max-width: 600px;
+}
+
+.item {
+  color: blue;
+  text-decoration: underline;
+}
+
+.wrapper {
+  display: flex;
+}

@@ -1,5 +1,5 @@
 import { getTrendingMoviesApi } from 'api/movieService';
-import Home from 'components/Home/Home';
+import MovieList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 
 const HomePage = () => {
@@ -12,12 +12,18 @@ const HomePage = () => {
   const getTrendingMovies = async () => {
     try {
       const data = await getTrendingMoviesApi();
-      setTrendingMovies(prevTrendingMovies => [...data]);
+      setTrendingMovies([...data]);
     } catch (error) {
       console.log(error);
     }
   };
-  return <Home trendingMovies={trendingMovies} />;
+  return (
+    <div>
+      <h1 className="title, container">Trending today</h1>
+      <MovieList moviesData={trendingMovies} />
+    </div>
+  );
 };
+
 
 export default HomePage;

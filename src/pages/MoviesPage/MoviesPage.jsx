@@ -1,12 +1,13 @@
 import { getSearchMoviesApi } from 'api/movieService';
 import SearchForm from 'components/Form/Form';
-import Movies from 'components/Movies/Movies';
+import MovieList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
   const [searchResults, setSearchResult] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  
 
   useEffect(() => {
     const query = searchParams.get('query');
@@ -27,8 +28,6 @@ const MoviesPage = () => {
     try {
       const data = await getSearchMoviesApi(query);
       setSearchResult(data);
-
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +35,7 @@ const MoviesPage = () => {
   return (
     <div>
       <SearchForm handleSubmit={handleSubmit} />
-      <Movies searchResults={searchResults} />;
+      <MovieList moviesData={searchResults} />
     </div>
   );
 };

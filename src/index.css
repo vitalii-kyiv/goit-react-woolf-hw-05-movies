@@ -22,7 +22,7 @@ h5,
 h6,
 p {
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 
 ul,
@@ -33,13 +33,15 @@ ol {
 }
 
 button {
-  padding: 0;
-
+  padding: 8px;
   font: inherit;
   color: inherit;
   background-color: transparent;
   cursor: pointer;
   display: block;
+  border: 2px solid blue;
+  border-radius: 5px;
+  outline: none;
 }
 
 a {
@@ -52,14 +54,20 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-.btnList {
-  display: flex;
-  gap: 24px;
+input {
+  padding: 8px;
+  border: 2px solid blue;
+  border-radius: 5px;
+  color: #007bff;
+  outline: none;
 }
 
-.btn {
-  padding: 8px;
-  border: 1px solid black;
-  border-radius: 8px;
+.container {
+  margin-bottom: 24px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.title {
+  margin-bottom: 8px;
 }
