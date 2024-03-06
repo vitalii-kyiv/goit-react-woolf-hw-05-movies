@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 
 const MovieDetails = ({ movieDetails }) => {
+  const location = useLocation();
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   return (
@@ -22,10 +23,20 @@ const MovieDetails = ({ movieDetails }) => {
           <h3 className="title">Additional infotmation:</h3>
           <ul className={css.list}>
             <li className={css.item}>
-              <Link to={`/movies/${movieDetails.id}/cast`}>Cast</Link>
+              <Link
+                to={`/movies/${movieDetails.id}/cast`}
+                state={{ from: location.state?.from }}
+              >
+                Cast
+              </Link>
             </li>
             <li className={css.item}>
-              <Link to={`/movies/${movieDetails.id}/reviews`}>Reviews</Link>
+              <Link
+                to={`/movies/${movieDetails.id}/reviews`}
+                state={{ from: location.state?.from }}
+              >
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>

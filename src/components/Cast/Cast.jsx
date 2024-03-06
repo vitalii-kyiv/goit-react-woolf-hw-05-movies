@@ -1,8 +1,24 @@
-import { MovieContext } from 'pages/MovieDetailsPage/MovieDetailsPage';
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import css from './Cast.module.css';
+import { useParams } from 'react-router-dom';
+import { getMovieCreditsApi } from 'api/movieService';
 const Cast = () => {
-  const { movieCast } = useContext(MovieContext);
+  const [movieCast, setMovieCast] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!id) return;
+    const getMovieCredits = async id => {
+      try {
+        const data = await getMovieCreditsApi(id);
+        setMovieCast(data.cast);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMovieCredits(id);
+  }, [id]);
+
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 

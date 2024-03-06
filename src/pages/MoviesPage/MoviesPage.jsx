@@ -7,12 +7,23 @@ import { useSearchParams } from 'react-router-dom';
 const MoviesPage = () => {
   const [searchResults, setSearchResult] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  
+  const [isSearched, setIsSearched] = useState(false);
 
   useEffect(() => {
     const query = searchParams.get('query');
     if (query) {
-      getSearchMovies(query);
+      const getSearchMovies = async () => {
+        try {
+          const data = await getSearchMoviesApi(query);
+          if (data.length > 0) {
+            setSearchResult(data);
+          }
+          setIsSearched(true);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getSearchMovies();
     }
   }, [searchParams]);
 
@@ -21,23 +32,21 @@ const MoviesPage = () => {
     const query = evt.target.elements.query.value.trim();
     if (query) {
       setSearchParams({ query });
+      setIsSearched(false);
     }
   };
 
-  const getSearchMovies = async query => {
-    try {
-      const data = await getSearchMoviesApi(query);
-      setSearchResult(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div>
       <SearchForm handleSubmit={handleSubmit} />
-      <MovieList moviesData={searchResults} />
+      {isSearched && searchResults.length === 0 ? (
+        <p className="container">
+          Movies according to your search query are not available.
+        </p>
+      ) : (
+        <MovieList moviesData={searchResults} />
+      )}
     </div>
   );
 };
-
 export default MoviesPage;

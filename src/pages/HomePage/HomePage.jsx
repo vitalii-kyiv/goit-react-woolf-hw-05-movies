@@ -6,17 +6,17 @@ const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
+    const getTrendingMovies = async () => {
+      try {
+        const data = await getTrendingMoviesApi();
+        setTrendingMovies([...data]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getTrendingMovies();
   }, []);
 
-  const getTrendingMovies = async () => {
-    try {
-      const data = await getTrendingMoviesApi();
-      setTrendingMovies([...data]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div>
       <h1 className="title, container">Trending today</h1>
@@ -24,6 +24,5 @@ const HomePage = () => {
     </div>
   );
 };
-
 
 export default HomePage;

@@ -5,13 +5,13 @@ const MovieList = ({ moviesData }) => {
   const location = useLocation();
   return (
     <div className="container">
-            <ul className={css.list}>
+      <ul className={css.list}>
         {moviesData.map(movieData => (
           <li key={movieData.id}>
             <Link
               className={css.item}
               to={`/movies/${movieData.id}`}
-              state={location}
+              state={{ from: location.pathname + location.search }}
             >
               {movieData.title}
             </Link>
